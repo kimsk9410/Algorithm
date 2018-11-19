@@ -12,16 +12,13 @@ public:
         ListNode result(0);
         ListNode* p = &result;
         int carry = 0;
-        while(l1 || l2){
-            int sum = carry + (l1 ? l1->val : 0) + (l2 ? l2->val : 0);
-            p->next = new ListNode(sum % 10);
+        while(l1 || l2 || carry){
+            carry += (l1 ? l1->val : 0) + (l2 ? l2->val : 0);
+            p->next = new ListNode(carry % 10);
             p = p->next;
-            carry = sum / 10;
+            carry /= 10;
             l1 = l1 ? l1->next : l1;
             l2 = l2 ? l2->next : l2;
-        }
-        if(carry){
-            p->next = new ListNode(carry);
         }
         return result.next;
     }
